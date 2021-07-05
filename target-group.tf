@@ -8,7 +8,7 @@ module "target_group" {
 }
 
 resource "aws_lb_target_group" "this" {
-  count = lookup(var.target_group, "port", 0) > 0 ? 1 : 0
+  count = var.target_group.port > 0 ? 1 : 0
 
   name     = module.target_group.name
   port     = var.target_group.port
