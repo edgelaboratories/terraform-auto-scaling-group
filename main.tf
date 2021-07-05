@@ -35,7 +35,7 @@ resource "aws_autoscaling_group" "this" {
 
   vpc_zone_identifier = var.subnet_ids
 
-  target_group_arns = var.target_group.port > 0 ? [aws_lb_target_group.this[0].arn] : []
+  target_group_arns = local.target_group_enabled == true ? [aws_lb_target_group.this[0].arn] : []
   health_check_type = "ELB"
 
   # This grace period is only applicable when the instance is InService, hence it's deactivated when using the lifecycle hooks.

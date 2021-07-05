@@ -1,4 +1,10 @@
+locals {
+  target_group_enabled = var.target_group.port > 0
+}
+
 module "target_group" {
+  count = local.target_group_enabled == true ? 1 : 0
+
   source = "git@github.com:edgelaboratories/terraform-short-name.git?ref=v0.1.0"
 
   # The name must be <=32 characters, contain only alphadigit+hyphens, and not end with "-".
@@ -8,9 +14,9 @@ module "target_group" {
 }
 
 resource "aws_lb_target_group" "this" {
-  count = var.target_group.port > 0 ? 1 : 0
+  count = local.target_group_enabled == true ? 1 : 0
 
-  name     = module.target_group.name
+  name     = module.target_group[0].name
   port     = var.target_group.port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
