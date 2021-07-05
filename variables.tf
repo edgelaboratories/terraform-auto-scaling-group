@@ -114,6 +114,10 @@ variable "target_group" {
   type = object({
     port = number
   })
+
+  default = {
+    port = -1
+  }
 }
 
 variable "health_check" {
