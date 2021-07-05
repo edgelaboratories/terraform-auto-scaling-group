@@ -6,10 +6,10 @@ Manages an [Amazon EC2 Auto Scaling Group][].
 
 - [dawn-consul-server](https://github.com/edgelaboratories/dawn-consul-server)
 - [dawn-nomad-server](https://github.com/edgelaboratories/dawn-nomad-server)
+- [dawn-vault](https://github.com/edgelaboratories/dawn-vault)
 
 ## TODO
 
-- [dawn-vault](https://github.com/edgelaboratories/dawn-vault)
 - SQS for lifecycle (from dawn-docker-host)
 - Use in dawn-docker-host
 
