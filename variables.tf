@@ -34,6 +34,7 @@ variable "desired_capacity" {
 }
 
 variable "instance_type" {}
+
 variable "image_id" {}
 
 variable "user_data" {
@@ -41,6 +42,7 @@ variable "user_data" {
 }
 
 variable "iam_instance_profile" {}
+
 variable "iam_role_name" {}
 
 variable "max_instance_lifetime" {
