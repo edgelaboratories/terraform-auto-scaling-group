@@ -100,6 +100,9 @@ resource "aws_autoscaling_lifecycle_hook" "launching" {
   default_result         = local.launching_hook.default_result
   heartbeat_timeout      = local.launching_hook.heartbeat_timeout
   lifecycle_transition   = local.launching_hook.lifecycle_transition
+
+  notification_target_arn = local.notification_target_arn
+  role_arn                = local.role_arn
 }
 
 resource "aws_autoscaling_lifecycle_hook" "terminating" {
@@ -110,4 +113,7 @@ resource "aws_autoscaling_lifecycle_hook" "terminating" {
   default_result         = local.terminating_hook.default_result
   heartbeat_timeout      = local.terminating_hook.heartbeat_timeout
   lifecycle_transition   = local.terminating_hook.lifecycle_transition
+
+  notification_target_arn = local.notification_target_arn
+  role_arn                = local.role_arn
 }
