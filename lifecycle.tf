@@ -12,16 +12,26 @@ locals {
     heartbeat_timeout    = 600 # AWS default is 3600
     lifecycle_transition = "autoscaling:EC2_INSTANCE_TERMINATING"
   }, lookup(var.lifecycle_hooks, "terminating", {}))
+
+  # When the SQS queue is enabled, Mufasa doesn't use those Describe* methods
+  # which are a source of rate limiting from the AWS API.
+  describe_actions = local.sqs_queue_enabled ? [] : [
+    "autoscaling:DescribeAutoScalingInstances",
+    "autoscaling:DescribeLifecycleHooks",
+  ]
 }
 
 data "aws_iam_policy_document" "lifecycle_hook" {
   statement {
     effect = "Allow"
 
-    actions = [
-      "autoscaling:CompleteLifecycleAction",
-      "autoscaling:RecordLifecycleActionHeartbeat",
-    ]
+    actions = concat(
+      [
+        "autoscaling:CompleteLifecycleAction",
+        "autoscaling:RecordLifecycleActionHeartbeat",
+      ],
+      local.describe_actions
+    )
 
     # Restrictions using the Auto Scaling Group ARN would create a chicken and egg problem
     # because it is relying on `wait_for_capacity_timeout`.

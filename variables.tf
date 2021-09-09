@@ -79,7 +79,8 @@ that is terminated correctly, or ask for more time up to 100 · heartbeat_timeou
 If the autoscaling group didn't get the notification, the ABANDON will terminate the instance.
 
     lifecycle_hooks = {
-      enabled = true
+      enabled     = true
+      sqs_enabled = true
 
       launching = {
         name              = "launching"
