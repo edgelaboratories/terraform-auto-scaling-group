@@ -69,7 +69,8 @@ variable "tags" {
 
 variable "lifecycle_hooks" {
   default = {
-    enabled = false
+    enabled     = false
+    sqs_enabled = false
   }
   description = <<EOF
 Configuration for the lifecycle hooks of the AutoScalingGroup. Here is a full example of the available options which shows the default values.
