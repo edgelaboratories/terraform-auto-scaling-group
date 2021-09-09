@@ -12,8 +12,8 @@ module "queue" {
 
   source = "./queue"
 
-  unique_name = module.common.unique_name
-  pretty_name = "Lifecycle queue for the ASG: ${module.common.unique_name}"
+  unique_name = var.unique_name
+  pretty_name = "Lifecycle queue for the ASG: ${var.unique_name}"
 
   stack_id = var.stack_id
 
