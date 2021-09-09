@@ -17,6 +17,11 @@ variable "security_group_ids" {
   default = []
 }
 
+variable "target_group_arns" {
+  type    = list(string)
+  default = []
+}
+
 variable "name_prefix" {}
 
 variable "key_name" {}
