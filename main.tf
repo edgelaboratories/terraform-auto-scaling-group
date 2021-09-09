@@ -1,6 +1,11 @@
 locals {
-  mufasa = merge({
-    enabled = var.lifecycle_hooks.enabled
+  mufasa = merge(
+    {
+      enabled   = var.lifecycle_hooks.enabled
+      sqs_queue = local.sqs_queue_enabled ? module.queue[0].queue_name : null
+
+      # FIXME: this should be separated
+      heartbeat_timeout = min(local.launching_hook.heartbeat_timeout, local.terminating_hook.heartbeat_timeout)
     },
     var.mufasa
   )
