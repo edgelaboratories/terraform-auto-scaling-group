@@ -108,6 +108,10 @@ resource "aws_autoscaling_group" "this" {
       default_result       = initial_lifecycle_hook.value.default_result
       heartbeat_timeout    = initial_lifecycle_hook.value.heartbeat_timeout
       lifecycle_transition = initial_lifecycle_hook.value.lifecycle_transition
+
+      # see queue.tf
+      notification_target_arn = local.notification_target_arn
+      role_arn                = local.role_arn
     }
   }
 
