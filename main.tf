@@ -9,6 +9,40 @@ locals {
     },
     var.mufasa
   )
+
+  parts = concat(
+    [
+      {
+        filename     = "/etc/mufasa/config.yml"
+        content_type = "application/yaml"
+        content = yamlencode({
+          mufasa = local.mufasa
+        })
+      }
+    ],
+    var.cloud_init_parts
+  )
+}
+
+data "cloudinit_config" "user_data" {
+  gzip          = false
+  base64_encode = false
+
+  dynamic "part" {
+    for_each = local.parts
+    content {
+      filename     = part.value["filename"]
+      content_type = lookup(part.value, "content_type", "text/cloud-config")
+      content      = part.value["content"]
+
+      # By default:
+      # * append lists to each other
+      # * recursively merge dict contents together, and append list values
+      # * concatenate strings together
+      # See: https://cloudinit.readthedocs.io/en/latest/topics/merging.html
+      merge_type = lookup(part.value, "merge_type", "list(append)+dict(no_replace,recurse_list)+str(append)")
+    }
+  }
 }
 
 # Ignore unencrypted root block device.
@@ -17,7 +51,7 @@ resource "aws_launch_configuration" "this" {
   name_prefix          = var.name_prefix
   image_id             = var.image_id
   instance_type        = var.instance_type
-  user_data            = var.user_data
+  user_data            = data.cloudinit_config.user_data.rendered
   iam_instance_profile = var.iam_instance_profile
 
   key_name = var.key_name

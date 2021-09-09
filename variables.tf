@@ -37,8 +37,35 @@ variable "instance_type" {}
 
 variable "image_id" {}
 
-variable "user_data" {
-  description = "Cloud-init content"
+variable "cloud_init_parts" {
+  description = <<EOF
+This is a list of additional cloud-init configuration files that should be
+passed to the instance when it starts.
+**This is dangerous as it allows to override any settings on the instance.**
+Consider using this variable only for testing purpose, and aim to
+provide a better interface for configuring what you want instead!
+For example:
+    extra_cloud_init_parts = [
+      {
+        filename     = "init-2.cfg"
+        content_type = "text/cloud-config"
+        merge_type   = "list(append)+dict(no_replace,recurse_list)+str(append)"
+        content  = <<EOD
+        #cloud-config
+    runcmd:
+      - apt-get install --yes toto
+    EOD
+      }
+    ]
+See:
+* [merge_type](https://cloudinit.readthedocs.io/en/latest/topics/merging.html)
+* [content_type](https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive)
+If not defined:
+* `merge_type` defaults to `list(append)+dict(no_replace,recurse_list)+str(append)`
+* `content_type` defaults to `text/cloud-config`
+EOF
+  type        = list(map(string))
+  default     = []
 }
 
 variable "iam_instance_profile" {}
