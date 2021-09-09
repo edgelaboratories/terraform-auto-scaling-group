@@ -19,7 +19,13 @@ module "queue" {
 
   # The messages become useless after the heartbeats time out, in which case SQS
   # will automatically purge them.
-  retention_period = ceil(max(local.launching_hook.heartbeat_timeout, local.terminating_hook.heartbeat_timeout) * 1.2)
+  retention_period = min(
+    max(
+      ceil(max(local.launching_hook.heartbeat_timeout, local.terminating_hook.heartbeat_timeout) * 1.2),
+      60 # the min value
+    ),
+    1209600 # the max value
+  )
 
   attach_to_role = var.iam_role_name
 }
