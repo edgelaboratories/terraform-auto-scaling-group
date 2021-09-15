@@ -1,5 +1,10 @@
 locals {
   target_group_enabled = var.target_group.port > 0
+
+  target_group_arns = concat(
+    var.target_group_arns,
+    local.target_group_enabled == true ? [aws_lb_target_group.this[0].arn] : []
+  )
 }
 
 module "target_group" {
