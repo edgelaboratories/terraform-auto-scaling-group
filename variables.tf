@@ -148,11 +148,13 @@ EOF
 
 variable "target_group" {
   type = object({
-    port = number
+    port     = number
+    protocol = string
   })
 
   default = {
-    port = -1
+    port     = -1
+    protocol = "HTTP"
   }
 }
 

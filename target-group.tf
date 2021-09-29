@@ -23,7 +23,7 @@ resource "aws_lb_target_group" "this" {
 
   name     = module.target_group[0].name
   port     = var.target_group.port
-  protocol = "HTTP"
+  protocol = var.target_group.protocol
   vpc_id   = var.vpc_id
 
   # If mufasa is enabled, it answers the health_check otherwise, consul does it.
