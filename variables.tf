@@ -190,3 +190,7 @@ When an instance launches, Amazon EC2 Auto Scaling uses the value of the HealthC
 EOF
   default     = 300 # AWS default value
 }
+
+variable "auto_instance_refresh" {
+  default = false
+}
