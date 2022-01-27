@@ -115,6 +115,21 @@ resource "aws_autoscaling_group" "this" {
     }
   }
 
+  dynamic "instance_refresh" {
+    for_each = var.auto_instance_refresh ? [{}] : []
+
+    # It changes the instances in two batches: a fifth, one hour later the remaining ones.
+    content {
+      strategy = "Rolling"
+      preferences {
+        checkpoint_delay       = 3600
+        checkpoint_percentages = [20, 100]
+        min_healthy_percentage = 90
+      }
+      triggers = "launch_configuration"
+    }
+  }
+
   tag {
     key                 = "Name"
     value               = var.name
