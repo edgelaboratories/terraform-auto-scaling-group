@@ -170,7 +170,7 @@ variable "health_check" {
   })
 
   default = {
-    internal            = -1
+    interval            = -1
     timeout             = -1
     healthy_threshold   = -1
     unhealthy_threshold = -1
