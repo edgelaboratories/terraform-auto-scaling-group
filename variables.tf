@@ -6,7 +6,10 @@ variable "machine_name" {}
 
 variable "unique_name" {}
 
-variable "vpc_id" {}
+variable "vpc_id" {
+  type    = string
+  default = ""
+}
 
 variable "subnet_ids" {
   type = list(string)
@@ -165,6 +168,13 @@ variable "health_check" {
     healthy_threshold   = number
     unhealthy_threshold = number
   })
+
+  default = {
+    internal            = -1
+    timeout             = -1
+    healthy_threshold   = -1
+    unhealthy_threshold = -1
+  }
 
   description = <<EOF
 Configuration for the HTTP health checks.
