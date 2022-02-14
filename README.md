@@ -6,6 +6,7 @@ Manages an [Amazon EC2 Auto Scaling Group][].
 
 - [dawn-consul-server](https://github.com/edgelaboratories/dawn-consul-server)
 - [dawn-nomad-server](https://github.com/edgelaboratories/dawn-nomad-server)
+- [dawn-ssh-bastion](https://github.com/edgelaboratories/dawn-ssh-bastion)
 - [dawn-vault](https://github.com/edgelaboratories/dawn-vault)
 
 ## TODO
