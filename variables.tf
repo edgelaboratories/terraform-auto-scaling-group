@@ -204,3 +204,9 @@ EOF
 variable "auto_instance_refresh" {
   default = false
 }
+
+variable "instance_refresh_checkpoint_percentages" {
+  description = "How much of the ASG is refreshed between each steps (lasting one hour)."
+  default     = [20, 100]
+  type        = list(number)
+}
