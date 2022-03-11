@@ -123,10 +123,10 @@ resource "aws_autoscaling_group" "this" {
       strategy = "Rolling"
       preferences {
         checkpoint_delay       = 3600
-        checkpoint_percentages = [20, 100]
+        checkpoint_percentages = var.instance_refresh_checkpoint_percentages
         min_healthy_percentage = 90
       }
-      triggers = "launch_configuration"
+      triggers = ["launch_configuration"]
     }
   }
 
