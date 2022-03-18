@@ -126,7 +126,7 @@ resource "aws_autoscaling_group" "this" {
         checkpoint_percentages = var.instance_refresh_checkpoint_percentages
         min_healthy_percentage = 90
       }
-      triggers = ["launch_configuration"]
+      triggers = []
     }
   }
 
