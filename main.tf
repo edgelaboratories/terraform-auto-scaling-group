@@ -60,9 +60,11 @@ resource "aws_launch_configuration" "this" {
     create_before_destroy = true
   }
 
+  # go-discover (Cloud auto-join doesn't work with required HTTP tokens.
+  # tfsec:ignore:aws-autoscaling-enforce-http-token-imds
   metadata_options {
     http_endpoint = "enabled"
-    http_tokens   = "required"
+    http_tokens   = "optional"
   }
 
   root_block_device {
