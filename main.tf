@@ -45,6 +45,8 @@ data "cloudinit_config" "user_data" {
   }
 }
 
+# Consul still need the non-token metadata accesses.
+# tfsec:ignore:aws-autoscaling-enforce-http-token-imds
 resource "aws_launch_configuration" "this" {
   name_prefix          = var.name_prefix
   image_id             = var.image_id
@@ -58,10 +60,6 @@ resource "aws_launch_configuration" "this" {
 
   lifecycle {
     create_before_destroy = true
-  }
-
-  metadata_options {
-    http_tokens = "required"
   }
 
   root_block_device {
