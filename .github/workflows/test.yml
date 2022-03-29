@@ -15,7 +15,7 @@ jobs:
         run: terraform fmt -check
 
       - name: tfsec
-        uses: aquasecurity/tfsec-pr-commenter-actions@v1.2.0
+        uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
         if: ${{ github.event.pull_request }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
