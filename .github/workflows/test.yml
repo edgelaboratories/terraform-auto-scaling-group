@@ -16,6 +16,6 @@ jobs:
 
       - name: tfsec
         uses: aquasecurity/tfsec-pr-commenter-actions@v1.2.0
-        if: ${{ github.event.pull_request {{
+        if: ${{ github.event.pull_request }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
