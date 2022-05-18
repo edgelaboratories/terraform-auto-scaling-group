@@ -53,13 +53,13 @@ passed to the instance when it starts.
 Consider using this variable only for testing purpose, and aim to
 provide a better interface for configuring what you want instead!
 For example:
-    extra_cloud_init_parts = [
+    cloud_init_parts = [
       {
         filename     = "init-2.cfg"
         content_type = "text/cloud-config"
         merge_type   = "list(append)+dict(no_replace,recurse_list)+str(append)"
         content  = <<EOD
-        #cloud-config
+    #cloud-config
     runcmd:
       - apt-get install --yes toto
     EOD
