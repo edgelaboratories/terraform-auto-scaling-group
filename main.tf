@@ -46,12 +46,12 @@ data "cloudinit_config" "user_data" {
 }
 
 resource "aws_launch_configuration" "this" {
-  name_prefix                   = var.name_prefix
-  image_id                      = var.image_id
-  instance_type                 = var.instance_type
-  user_data                     = data.cloudinit_config.user_data.rendered
-  iam_instance_profile          = var.iam_instance_profile
-  associate_public_ip_addresses = var.associate_public_ip_addresses
+  name_prefix                 = var.name_prefix
+  image_id                    = var.image_id
+  instance_type               = var.instance_type
+  user_data                   = data.cloudinit_config.user_data.rendered
+  iam_instance_profile        = var.iam_instance_profile
+  associate_public_ip_address = var.associate_public_ip_address
 
   key_name = var.key_name
 

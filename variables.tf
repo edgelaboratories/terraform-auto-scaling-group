@@ -92,7 +92,7 @@ See: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-life
 EOF
 }
 
-variable "associate_public_ip_addresses" {
+variable "associate_public_ip_address" {
   default = false
 }
 
