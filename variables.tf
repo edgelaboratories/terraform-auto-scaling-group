@@ -27,7 +27,9 @@ variable "target_group_arns" {
 
 variable "name_prefix" {}
 
-variable "key_name" {}
+variable "key_name" {
+  default = ""
+}
 
 variable "min_size" {
   type = number
